@@ -1,0 +1,5 @@
+experiment,settings,participant_accuracy,participant_auc,correct_of_53,protocol,status
+m1_norm_global,"lr 0.001, input_norm=global",0.453,0.432,24,"kfold10 (ERM, no DANN)","exploratory, not better than m3 best (0.623)"
+m1_lr0003_norm_channel,"lr 0.0003, input_norm=channel",0.566,0.599,30,"kfold10 (ERM, no DANN)","exploratory, not better than m3 best (0.623)"
+m1_lr0003_chdrop_noise,"lr 0.0003, channel_drop=0.2, noise=0.1",0.604,0.523,32,"kfold10 (ERM, no DANN)","exploratory, not better than m3 best (0.623)"
+m1_lr0003_crop08,"lr 0.0003, crop_frac=0.8",0.585,0.533,31,"kfold10 (ERM, no DANN)","exploratory, not better than m3 best (0.623)"
