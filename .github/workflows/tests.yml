@@ -15,5 +15,5 @@ jobs:
           python-version: "3.10"
       # cpu torch only, the full one is huge and CI has no gpu anyway
       - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
-      - run: pip install numpy pandas scikit-learn pytest
+      - run: pip install numpy pandas matplotlib scikit-learn pytest
       - run: pytest -q
