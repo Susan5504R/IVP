@@ -1,0 +1,14 @@
+{
+    "fold": 3,
+    "test_epochs": 375,
+    "test_subjects": [
+        0,
+        1,
+        16,
+        26,
+        50
+    ],
+    "ig_steps": 64,
+    "target_class": 1,
+    "mean_absolute_convergence_delta": 5.008907351111702e-07
+}
