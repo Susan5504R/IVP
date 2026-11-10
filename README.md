@@ -42,7 +42,7 @@ Agree on these before writing against each other. Change them only by telling ev
 - Results: `runs/results.csv` with `experiment, protocol, level, metric, mean, sd`. Values are fractions (0.87, not 87). Names the results table looks for:
   - `experiment`: `cdl_mddnet` (full 128 channels), `cdl_mddnet_ch<N>` for a reduced montage (`cdl_mddnet_ch32`), plus `ms_mddnet` for the baseline
   - `protocol`: `kfold10` or `loso`
-  - `level`: `participant` (majority vote) or `epoch`
+  - `level`: `participant` (mean epoch probability per participant, thresholded at 0.5) or `epoch`
   - `metric`: `accuracy`, `sensitivity`, `specificity`, `precision`, `f1`, `auc`
 
 ## Workflow
@@ -61,11 +61,15 @@ python -m src.eval.results_table --results runs/results.csv --eff reports/effici
 python -m src.eval.update_slides deck.pptx --out deck_measured.pptx
 ```
 
-`tests/test_no_subject_leakage.py` fails if any participant appears in both train and test in any 10-fold or LOSO split. Tests for splits and the normalizer skip until those modules exist.
+`tests/test_no_subject_leakage.py` fails if any participant appears in both train and test in any 10-fold or LOSO split. Split and normalizer coverage is in `tests/test_splits.py` and `tests/test_normalizer.py`.
+
+## Member 7 inference demo
+
+The one-epoch CLI expects an already preprocessed NumPy array and an inference checkpoint paired with that fold's normalizer. Installation, release download, exact input requirements, expected output, and limitations are documented in [README_MEMBER7.md](README_MEMBER7.md).
 
 ## Results table and slides
 
-When Member 7 has produced `runs/results.csv`:
+Using the accepted `runs/results.csv` without replacing it:
 
 1. Run the benchmark for the final model, writing `reports/efficiency.csv`.
 2. Run `results_table`. It writes `reports/results_table.md`: published numbers, deck targets, measured values and met / not met.
@@ -79,6 +83,6 @@ When Member 7 has produced `runs/results.csv`:
 | Data pipeline | done (Member 2; 53 participants, 4,002 epochs, see reports/preprocessing_report.md) |
 | Splits and training | done (10-fold and LOSO run; results in results/, checkpoints in release v1.0.0) |
 | Model | done (CDLMDDNet merged, 25,627 parameters at 128 channels) |
-| Evaluation | not started |
+| Evaluation | saved-prediction audit and 114-test suite complete; released-checkpoint smoke test passed with synthetic input (EEG data unavailable locally) |
 | Channel reduction | not started |
 | Interpretability | not started |
